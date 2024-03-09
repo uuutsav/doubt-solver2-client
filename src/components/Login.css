@@ -182,7 +182,7 @@ img {
 /* For large devices */
 @media screen and (min-width: 1064px) {
   .container {
-    height: 100vh;
+    height: 90vh;
     display: grid;
     place-items: center;
   }
