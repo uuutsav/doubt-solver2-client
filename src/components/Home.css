@@ -1,0 +1,70 @@
+/*=============== VARIABLES CSS ===============*/
+:root {
+    /*========== Colors ==========*/
+    /*Color mode HSL(hue, saturation, lightness)*/
+    --first-color: hsl(208, 100%, 62%);
+    --second-color: hsl(208, 87%, 75%);
+    --title-color: hsl(244, 12%, 12%);
+    --text-color: hsl(214, 4%, 36%);
+    --body-color: hsl(208, 97%, 85%);
+    /*========== Font and typography ==========*/
+    /*.5rem = 8px | 1rem = 16px ...*/
+    --body-font: "Poppins", sans-serif;
+    --h1-font-size: 69px;
+    --h2-font-size: 50;
+    --h3-font-size: 40px;
+    --small-font-size: 1.1rem;
+    --smaller-font-size: .9rem;
+    /*========== Font weight ==========*/
+    --font-medium: 500;
+    --font-semi-bold: 600;
+  }
+
+.hero {
+    display: flex;
+    height: calc(100vh - 69px);
+    width: 100vw;
+    background-color: #f0f0f0;
+}
+
+.left-parent{
+    flex: 2;
+    background-color: #ffcbcb;
+    position: relative;
+}
+
+.right-parent{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffeeee;
+
+}
+
+.home-texts-box{
+    /* margin: 80% 0 0 0; */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.home-texts-box h1{
+    color: white;
+    font-size: var(--h1-font-size);
+}
+
+
+.button-divs-left {
+    flex: 1;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: rgb(61, 201, 248);
+    color: white;
+    border-radius: 11px;
+    text-decoration: none;
+}
+
+.button-divs-left h3 {
+    color: white;
+    font-size: var(--h3-font-size);
+}
