@@ -1,6 +1,6 @@
 /*
  TODO: Put transition and ease in popup
- 
+ TODO: Put in loaders.
 */
 
 import React, { useEffect, useState } from 'react'
@@ -8,20 +8,20 @@ import './Ask.css'
 import axios from 'axios';
 
 const Ask = (props) => {
+  const [headign, setHeading] = useState("Ask a question")
   const [category, setCategory] = useState('Question')
   const [subject, setSubject] = useState('')
   const [questionBody, setQuestionBody] = useState('')
   const [file, setFile] = useState(null)
-  // useEffect(() => {
-  //   console.log(subject)
-  // }, [subject, category])
+
+  // const [questionID, setQuestionID] = useState('')
 
   const doubtCategories = ["Basic Question", "One Topic", "Full Chapter"]
   const subjects = ["HPC", "CN", "OS"]
 
-  const [isQuestion, setIsQuestion] = useState(true)
-  const [isTopic, setIsTopic] = useState(false)
-  const [isChapter, setIsChapter] = useState(false)
+  // const [isQuestion, setIsQuestion] = useState(true)
+  // const [isTopic, setIsTopic] = useState(false)
+  // const [isChapter, setIsChapter] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -31,25 +31,37 @@ const Ask = (props) => {
       questionBody: questionBody,
       file: file
     }
-    console.log(data)
-    console.log("Prop: ", props.togglePopupAsk)
+    // console.log(data)
 
-    
-    try{
-      const response = await axios.post('/api/ask', data);
-      setTimeout(() => {
+    // send formdata to server
+    try {
+      const response = await axios.post('http://localhost:5000/api/ask', data);
+      // console.log("Ask response: ", response.data);
+
+      if (response.data.status == true) {
+        props.setQuestionID(response.data.questionID); // this takes smol time to update
+        console.log("Question ID: ", props.questionID);
+
+        // turn off the popups
         props.togglePopupAsk();
-      }, 1000);
-  
-    } catch(error){
-      console.log("Error axios")
+        props.togglePopupFindPeer();
+
+      } else {
+        console.log("Database Error ")
+        // try again
+        setHeading("Oops! Something went wrong. Please try again")
+      }
+
+    } catch (error) {
+      console.log("Error axios: ", error)
+      setHeading("Oops! Server is not responding. Please try again later")
     }
 
   }
 
   return (
     <div className="popup">
-      <h2>Ask a Question</h2>
+      <h2>{headign}</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="subject">Select Subject:</label>
         <select id="subject" name="subject" onChange={(e) => {
@@ -88,7 +100,7 @@ const Ask = (props) => {
         <label htmlFor="file">Upload Doubt Image:</label>
         <input type="file" id="file" name="file" onChange={(e) => {
           setFile(e.target.files[0])
-        }}/>
+        }} />
 
 
         <button type="submit" className='submit-button'>Find Peers</button>
