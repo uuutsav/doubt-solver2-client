@@ -110,7 +110,7 @@ const FindPeers = ({ togglePopupFindPeer, togglePopupAsk, questionID, username }
         });
       } else {
         // 5. failed
-        console.log("Doubt Request failed: ",data)
+        console.log("Doubt Request failed: ", data)
         setButtonTexts(prevButtonTexts => {
           const newArray = [...prevButtonTexts];
           // Update the value at the specified index
@@ -124,34 +124,39 @@ const FindPeers = ({ togglePopupFindPeer, togglePopupAsk, questionID, username }
     }
   }
 
-const handleFindPeerDone = () => {
-  togglePopupFindPeer();
-}
+  const handleFindPeerDone = () => {
+    togglePopupFindPeer();
+  }
 
   // newtonsCradle.register();
   return (
     <div className="popup">
       <h2 className='popup-title'>Find peers to solve doubt with</h2>
-      <div className="user-grid">
-        {users.map((user, index) => (
-          <div key={index} className="user-item">
-            <div>
-              <img src={user.dp} alt='not heheing' className="user-dp" />
+      <div className='popup-body'>
+        <div className="user-grid">
+          {users.map((user, index) => (
+            <div key={index} className="user-item">
+              <div className='dp-div'>
+                <img src={user.dp} alt='not heheing' className="user-dp" />
+              </div>
+              <div className="user-info">
+                <h3>{user.name}</h3>
+                <p>{user.description}</p>
+                <h3>CGPA: {user.cgpa}</h3>
+                <h4>University: {user.university}</h4>
+              </div>
+              {/* {console.log(buttonTexts)} */}
+              <button className='request-button' onClick={() => {
+                handleRequestDoubt(index)
+              }}>{buttonTexts[index]}</button>
             </div>
-            <div className="user-info">
-              <h3>{user.name}</h3>
-              <p>{user.description}</p>
-            </div>
-            {/* {console.log(buttonTexts)} */}
-            <button className='request-button' onClick={() => {
-              handleRequestDoubt(index)
-            }}>{buttonTexts[index]}</button>
-          </div>
-        ))}
+          ))}
+        </div>
+        <div className='btn-div'>
+          <button onClick={handleFindPeerDone} className='btn-done'>Done</button>
+        </div>
       </div>
-      <div >
-        <button onClick={handleFindPeerDone}>Done</button>
-      </div>
+
     </div>
   )
 }

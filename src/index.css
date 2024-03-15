@@ -1,44 +1,96 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: hsl(208, 100%, 62%);
+  --second-color: hsl(208, 87%, 75%);
+  --title-color: hsl(244, 12%, 12%);
+  --text-color: hsl(214, 4%, 36%);
+  --body-color: hsl(208, 97%, 85%);
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Poppins", sans-serif;
+  --h2-font-size: 2.3rem;
+  --small-font-size: 1.1rem;
+  --smaller-font-size: .9rem;
+  /*========== Font weight ==========*/
+  --font-medium: 500;
+  --font-semi-bold: 600;
+}
+
 .popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 80vh;
+  min-height: 69vh;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 2px solid #000000;
+  border-radius: 23px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.popup h2 {
+  color: var(--title-color);
+  font-size: var(--h2-font-size);
+  margin-bottom: 0.5rem;
+  margin-inline: 1.5rem;
+  padding: 0.8rem;
   
-  .popup h2 {
-    margin-top: 0;
-  }
-  
-  .popup form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .popup label {
-    margin-bottom: 5px;
-  }
-  
-  .popup input,
-  .popup select,
-  .popup button {
-    margin-bottom: 10px;
-    padding: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .popup button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .popup button:hover {
-    background-color: #0056b3;
-  }
-  
+}
+
+.popup form {
+  display: flex;
+  flex-direction: column;
+
+  margin-inline: 1.5rem;
+  row-gap: 1.25rem;
+  backdrop-filter: blur(20px);
+  padding: 0.8rem;
+  border-radius: 1rem;
+
+}
+
+.popup label {
+  display: block;
+  color: var(--title-color);
+  font-size: var(--small-font-size);
+  font-weight: var(--font-semi-bold);
+  margin-bottom: 0.1rem;
+}
+.popup label::placeholder {
+  color: var(--text-color);
+}
+
+.popup input,
+.popup select,
+.popup button {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+.popup button {
+  font-family: var(--body-font);
+  width: 100%;
+  padding: 14px 2rem;
+  border-radius: 6px;
+  background: linear-gradient(180deg, var(--first-color), var(--second-color));
+  color: #fff;
+  font-size: var(--small-font-size);
+  font-weight: var(--font-semi-bold);
+  box-shadow: 0 5px 0px hsla(244, 75%, 48%, 0.5);
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 3px 0px hsla(244, 75%, 48%, 0.5);
+}

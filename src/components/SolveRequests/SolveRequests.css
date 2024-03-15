@@ -1,11 +1,19 @@
 .popup {
     display: flex;
     flex-direction: column;
+    overflow: auto;
+
   }
   
   .question-container {
     display: flex;
     margin-bottom: 20px;
+    
+    height: 150px;
+    border-width: 50px;
+    border-color: black;
+    border-radius: 10px;
+    overflow:hidden;
   }
   
   .image-container {
@@ -30,3 +38,8 @@
     margin: 0;
   }
   
+  .hr {
+    border-top: dotted 5px;
+    border-spacing: 115px;
+    margin: 0px 246px 30px;
+  }

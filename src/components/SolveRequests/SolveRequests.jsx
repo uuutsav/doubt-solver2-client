@@ -2,50 +2,47 @@
 
 import React, { useEffect, useState } from 'react'
 import './SolveRequests.css'
+import axios from 'axios'
 
-const tempArr = [{
-  id: 1,
-  image: '/images/dp.jpeg',
-  username: 'ehe',
-  name: 'hehe',
-  title: 'Hehe ?',
-  description: 'some hehe description here'
-},
-{
-  id: 2,
-  image: '/images/dp.jpeg',
-  username: 'ehe',
-  name: 'hehe',
-  title: 'Hehe ?',
-  description: 'some hehe description here'
-},
-{
-  id: 1,
-  image: '/images/dp.jpeg',
-  username: 'ehe',
-  name: 'hehe',
-  title: 'Hehe ?',
-  description: 'some hehe description here'
-},
-{
-  id: 1,
-  image: '/images/dp.jpeg',
-  username: 'ehe',
-  name: 'hehe',
-  title: 'Hehe ?',
-  description: 'some hehe description here'
-}]
+/*
+1. Fetch all requests
+2. When clicked 'accept', send data to backend
+3. if response status = true
+4. navigate to /chat
+*/
 
 const SolveRequests = () => {
-  const [requests, setRequests] = useState(tempArr)
-  useEffect(() => {
-    //api call here
-  })
+  const [requests, setRequests] = useState([])
 
+  useEffect(() => {
+    // 1
+    let data = {}
+
+    const getAllRequests = async () => {
+      const response = await axios.get('http://localhost:5000/api/getRequests')
+      data = response.data;
+
+      console.log(response.data)
+      setRequests(data.requests)
+    }
+
+    try {
+      getAllRequests();
+
+    }catch(error) {
+      console.log("error: ", error)
+    }
+  }, [])
+
+
+  const handleAcceptRequest = () => {
+    // logic to accept connection and navigate to /chat
+  }
   return (
     <div className="popup">
       {requests.map(request => (
-        <div key={request.id} className="question-container">
+        <div key={request.id} >
+        <div className="question-container">
 
           <div className="image-container">
             <img src={request.image} alt="Question" />
@@ -56,8 +53,10 @@ const SolveRequests = () => {
           </div>
           <div className='user-container'>
             <p>Asker: {request.name}<span> @{request.username}</span></p>
-
+            <button>Accept Doubt</button>
           </div>
+        </div>
+        <hr className='hr' />
         </div>
       ))}
     </div>

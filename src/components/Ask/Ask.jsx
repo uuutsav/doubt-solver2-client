@@ -36,6 +36,20 @@ const Ask = (props) => {
     // send formdata to server
     try {
       const response = await axios.post('http://localhost:5000/api/ask', data);
+
+      /*
+
+      const token = localStorage.getItem('token');
+      if (!token){
+        // navigate to /login
+      }
+      const response = await axios.post('http://localhost:5000/api/ask', data, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      */
       // console.log("Ask response: ", response.data);
 
       if (response.data.status == true) {
@@ -56,7 +70,6 @@ const Ask = (props) => {
       console.log("Error axios: ", error)
       setHeading("Oops! Server is not responding. Please try again later")
     }
-
   }
 
   return (
