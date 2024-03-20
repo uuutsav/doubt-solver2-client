@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Signup = (onSignup) => {
-  const [fname, setfName] = useState('');
-  const [lname, setlName] = useState('');
+  const [firstName, setfName] = useState('');
+  const [lastName, setlName] = useState('');
   const [mobileNumber, setMobileNumber] = useState('')
   const [email, setEmail] = useState('')
   const [strongSubject, setStrongSubject] = useState('')
@@ -21,9 +21,9 @@ const Signup = (onSignup) => {
     e.preventDefault();
 
     try {
-      const data = {
-        fname,
-        lname,
+      let data = {
+        firstName,
+        lastName,
         mobileNumber,
         email,
         strongSubject,
@@ -33,8 +33,15 @@ const Signup = (onSignup) => {
         branch
       }
 
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      data = JSON.stringify(data)
       console.log(data)
-      const response = await axios.post('http://localhost:5000/api/auth/signup', data);
+      const response = await axios.post('http://localhost:5000/api/auth/signup', data, config);
       const { token } = response.data;
       console.log("Sent: ", response)
       // onSignup(token);
@@ -71,7 +78,7 @@ const Signup = (onSignup) => {
                 className='login__input'
                 type="text"
                 placeholder="First Name*"
-                value={fname}
+                value={firstName}
                 onChange={(e) => setfName(e.target.value)}
               />
               <input
@@ -79,7 +86,7 @@ const Signup = (onSignup) => {
                 className='login__input'
                 type="text"
                 placeholder="Last Name"
-                value={lname}
+                value={lastName}
                 onChange={(e) => setlName(e.target.value)}
               />
             </div>

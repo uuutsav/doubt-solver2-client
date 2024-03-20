@@ -1,13 +1,14 @@
 // Home.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import './Home.css'
 import Ask from './Ask/Ask';
 import FindPeers from './FindPeers/FindPeers';
 import SolveRequests from './SolveRequests/SolveRequests';
+import axios from 'axios';
 
-const Home = ({ username, onLogout }) => {
+const Home = ({ userID }) => {
   const [showPopupAsk, setShowPopupAsk] = useState(false);
   const [showPopupFindPeer, setShowPopupFindPeer] = useState(false);
   const [showPopupSolve, setShowPopupSolve] = useState(false)
@@ -15,13 +16,24 @@ const Home = ({ username, onLogout }) => {
 
   const [questionID, setQuestionID] = useState(0)
 
+  const [subjects, setSubjects] = useState([]);
+  const [subjectIDs, setSubjectIDs] = useState([]);
   
+  useEffect(() => {
+    
+  }, [])
 
-  const togglePopupAsk = () => {
+
+  const togglePopupAsk = async () => {
     // console.log("Toggled  togglePopupAsk")
     setShowLoader(false)
     setShowPopupFindPeer(false)
     setShowPopupSolve(false)
+
+    
+    await getSubjects()
+
+    
     setShowPopupAsk(!showPopupAsk);
     // setShowLoader(!showLoader)
     
@@ -46,6 +58,28 @@ const Home = ({ username, onLogout }) => {
   const toggleLoader = () => {
     setShowLoader(!showLoader)
   }
+
+  const getSubjects = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/subject/all")
+      const arr = response.data.subjects;
+      // console.log(arr)
+
+      const tempSub = [];
+      const tempSubIDs = [];
+      arr.map((value, index) => {
+        tempSub[index] = value.description;
+        tempSubIDs[index] = value._id;
+      })
+      setSubjects(tempSub)
+      setSubjectIDs(tempSubIDs)
+      console.log(subjects)
+    } catch (error){
+      console.log("Error getting subject list: ", error)
+    }
+  }
+
+  
   return (
     <div className='hero'>
       {/* <Navbar loggedIn={true} onLogout={onLogout} /> */}
@@ -63,8 +97,8 @@ const Home = ({ username, onLogout }) => {
           <h3>Ask</h3>
           <p>Some Desc.</p>
         </button>
-        {showPopupAsk && <Ask togglePopupAsk={togglePopupAsk} togglePopupFindPeer={togglePopupFindPeer} togglePopupSolve={togglePopupSolve} questionID={questionID} setQuestionID={setQuestionID}/>}
-        {showPopupFindPeer && <FindPeers togglePopupAsk={togglePopupAsk} togglePopupFindPeer={togglePopupFindPeer} togglePopupSolve={togglePopupSolve} questionID={questionID} username={username}/>}
+        {showPopupAsk && <Ask subjects={subjects} subjectIDs={subjectIDs} userID={userID} togglePopupAsk={togglePopupAsk} togglePopupFindPeer={togglePopupFindPeer} togglePopupSolve={togglePopupSolve} questionID={questionID} setQuestionID={setQuestionID}/>}
+        {showPopupFindPeer && <FindPeers togglePopupAsk={togglePopupAsk} togglePopupFindPeer={togglePopupFindPeer} togglePopupSolve={togglePopupSolve} questionID={questionID} userID={userID}/>}
         {showPopupSolve && <SolveRequests togglePopupAsk={togglePopupAsk} togglePopupFindPeer={togglePopupFindPeer} togglePopupSolve={togglePopupSolve}/>}
         
         <button className="button-divs-left" 
@@ -83,7 +117,7 @@ const Home = ({ username, onLogout }) => {
 
 
         <div className=''>
-          {/* <p>Welcome, {username}!</p> */}
+          {/* <p>Welcome, {userID}!</p> */}
           {/* <button onClick={onLogout}>Logout</button> */}
 
         </div>

@@ -29,7 +29,9 @@ Request Doubt
 const tempArr = [{
   dp: '/images/dp.jpeg',
   name: 'Hehe',
-  description: "This guy just HEHEd the whole code as if it's a monosyllable."
+  description: "This guy just HEHEd the whole code as if it's a monosyllable.",
+  cgpa: "",
+  university: ""
 },
 {
   dp: 'https://i.pinimg.com/736x/eb/ee/03/ebee037eba08e25d5920ee10d4c2d76d.jpg',

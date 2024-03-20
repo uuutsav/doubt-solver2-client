@@ -9,6 +9,15 @@ import axios from 'axios'
 2. When clicked 'accept', send data to backend
 3. if response status = true
 4. navigate to /chat
+
+{ 
+  id: 'question id,
+  image: 'img url,
+  title: 'qn title',
+  description: 'qn description',
+  name: 'jo banda question poocha uska naam',
+  username: 'bande ka naam'
+}
 */
 
 const SolveRequests = () => {
@@ -36,6 +45,12 @@ const SolveRequests = () => {
 
 
   const handleAcceptRequest = () => {
+    const data = {
+      id: 'question id',
+      username: 'request karne wale ka username'
+    }
+    const response = axios.get('http://localhost:5000/api/acceptDoubtRequest')
+
     // logic to accept connection and navigate to /chat
   }
   return (

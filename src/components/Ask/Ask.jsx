@@ -7,17 +7,24 @@ import React, { useEffect, useState } from 'react'
 import './Ask.css'
 import axios from 'axios';
 
+let subjects = []
+
 const Ask = (props) => {
   const [headign, setHeading] = useState("Ask a question")
   const [category, setCategory] = useState('Question')
   const [subject, setSubject] = useState('')
+  const [subjectIndex, setSubjectIndex] = useState('')
   const [questionBody, setQuestionBody] = useState('')
   const [file, setFile] = useState(null)
 
   // const [questionID, setQuestionID] = useState('')
+  useEffect(() => {
+    subjects = props.subjects;
+    console.log(subjects)
+  }, [])
 
   const doubtCategories = ["Basic Question", "One Topic", "Full Chapter"]
-  const subjects = ["HPC", "CN", "OS"]
+  // const subjectIDs = props.subjectIDs;
 
   // const [isQuestion, setIsQuestion] = useState(true)
   // const [isTopic, setIsTopic] = useState(false)
@@ -25,31 +32,33 @@ const Ask = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setSubjectIndex(subjects.indexOf(subject))
+
     const data = {
-      subject: subject,
+      askerUserId: props.userID,
+      subjectId: subject,
+
       doubtType: category,
-      questionBody: questionBody,
+      question: questionBody,
       file: file
     }
     // console.log(data)
 
-    // send formdata to server
     try {
-      const response = await axios.post('http://localhost:5000/api/ask', data);
-
-      /*
-
       const token = localStorage.getItem('token');
-      if (!token){
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      };
+
+      if (!token) {
         // navigate to /login
       }
-      const response = await axios.post('http://localhost:5000/api/ask', data, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+      const response = await axios.post('http://localhost:5000/api/doubt/ask', data, config);
 
-      */
+
       // console.log("Ask response: ", response.data);
 
       if (response.data.status == true) {
@@ -71,6 +80,7 @@ const Ask = (props) => {
       setHeading("Oops! Server is not responding. Please try again later")
     }
   }
+
 
   return (
     <div className="popup">

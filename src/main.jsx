@@ -8,6 +8,9 @@ import Home from './components/Home.jsx'
 import Loader from './components/Loader/Loader.jsx'
 import Login from './components/Login.jsx'
 import {jwtDecode} from 'jwt-decode';
+import Signup from './components/Signup.jsx';
+
+let userID = "";
 
 // Function to check if the JWT token is present
 const isTokenValid = () => {
@@ -23,7 +26,8 @@ const isTokenValid = () => {
     // Decode 
     const decodedToken = jwtDecode(token);
     console.log("Decoded JWT: ", decodedToken)
-    
+    userID = decodedToken.id.id;
+    console.log(userID)
     const currentTime = Date.now() / 1000; // Convert milliseconds to seconds
     if (decodedToken.exp && decodedToken.exp < currentTime) {
       // Token is expired
@@ -54,6 +58,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route element={<ProtectedRoute element={<Layout />} />}>
           <Route index element={<Home />} />
           {/* Use ProtectedRoute for protected routes */}
