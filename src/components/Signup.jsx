@@ -32,6 +32,7 @@ const Signup = (onSignup) => {
         course,
         branch
       }
+      console.log(strongSubject)
 
       const config = {
         headers: {

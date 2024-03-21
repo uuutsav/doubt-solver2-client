@@ -10,9 +10,7 @@ import Login from './components/Login.jsx'
 import {jwtDecode} from 'jwt-decode';
 import Signup from './components/Signup.jsx';
 
-let userID = "";
 
-// Function to check if the JWT token is present
 const isTokenValid = () => {
   console.log("Checking ")
   const token = localStorage.getItem('token');
@@ -23,11 +21,8 @@ const isTokenValid = () => {
   }
 
   try {
-    // Decode 
     const decodedToken = jwtDecode(token);
-    console.log("Decoded JWT: ", decodedToken)
-    userID = decodedToken.id.id;
-    console.log(userID)
+    // console.log("Decoded JWT: ", decodedToken)
     const currentTime = Date.now() / 1000; // Convert milliseconds to seconds
     if (decodedToken.exp && decodedToken.exp < currentTime) {
       // Token is expired

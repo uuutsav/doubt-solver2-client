@@ -1,6 +1,11 @@
 /*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /*=============== VARIABLES CSS ===============*/
 :root {
   /*========== Colors ==========*/
@@ -21,6 +26,23 @@
   --font-semi-bold: 600;
 }
 
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #fff9f92a; /* color of the track */
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 228, 228, 0.432); 
+  border-radius: 23px; 
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 199, 199, 0.747); /* color of the scrollbar handle on hover */
+}
+
+
 .popup {
   position: fixed;
   top: 50%;
@@ -30,7 +52,7 @@
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 20px;
-  border: 2px solid #000000;
+  border: 5px solid #000000;
   border-radius: 23px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;

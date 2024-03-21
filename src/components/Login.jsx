@@ -23,10 +23,10 @@ const Login = ({ onLogin }) => {
       }
       console.log(data)
       const response = await axios.post('http://localhost:5000/api/auth/login', data);
-      const { token } = response.data;
+      const { token, userID } = response.data;
       setToken(token)
       localStorage.setItem('token', token)
-      console.log(token)
+      console.log(userID)
       // onLogin(token);
       setTimeout(() => {
         navigate('/')

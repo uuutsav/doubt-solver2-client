@@ -1,23 +1,23 @@
 // Home.jsx
 import React, { useEffect, useState } from 'react';
-import Navbar from './Navbar';
-import { Link } from 'react-router-dom';
 import './Home.css'
 import Ask from './Ask/Ask';
 import FindPeers from './FindPeers/FindPeers';
 import SolveRequests from './SolveRequests/SolveRequests';
 import axios from 'axios';
 
-const Home = ({ userID }) => {
+const Home = ({ }) => {
   const [showPopupAsk, setShowPopupAsk] = useState(false);
   const [showPopupFindPeer, setShowPopupFindPeer] = useState(false);
   const [showPopupSolve, setShowPopupSolve] = useState(false)
   const [showLoader, setShowLoader] = useState(false)
 
-  const [questionID, setQuestionID] = useState(0)
+  const [doubtId, setDoubtId] = useState('')
 
   const [subjects, setSubjects] = useState([]);
+  const [subject, setSubject] = useState('')
   const [subjectIDs, setSubjectIDs] = useState([]);
+  const [subjectId, setSubjectId] = useState('')
   
   useEffect(() => {
     
@@ -30,15 +30,12 @@ const Home = ({ userID }) => {
     setShowPopupFindPeer(false)
     setShowPopupSolve(false)
 
-    
     await getSubjects()
 
-    
     setShowPopupAsk(!showPopupAsk);
     // setShowLoader(!showLoader)
     
   };
-
   const togglePopupFindPeer = () => {
     // console.log("Toggled ")
     setShowLoader(false)
@@ -46,7 +43,6 @@ const Home = ({ userID }) => {
     setShowPopupAsk(false);
     setShowPopupFindPeer(!showPopupFindPeer)
   }
-
   const togglePopupSolve = () => {
     // console.log("Toggled solve")
     setShowPopupFindPeer(false)
@@ -54,7 +50,6 @@ const Home = ({ userID }) => {
     setShowPopupAsk(false)
     setShowPopupSolve(!showPopupSolve)
   }
-
   const toggleLoader = () => {
     setShowLoader(!showLoader)
   }
@@ -73,7 +68,7 @@ const Home = ({ userID }) => {
       })
       setSubjects(tempSub)
       setSubjectIDs(tempSubIDs)
-      console.log(subjects)
+      // console.log(subjects)
     } catch (error){
       console.log("Error getting subject list: ", error)
     }
@@ -97,35 +92,23 @@ const Home = ({ userID }) => {
           <h3>Ask</h3>
           <p>Some Desc.</p>
         </button>
-        {showPopupAsk && <Ask subjects={subjects} subjectIDs={subjectIDs} userID={userID} togglePopupAsk={togglePopupAsk} togglePopupFindPeer={togglePopupFindPeer} togglePopupSolve={togglePopupSolve} questionID={questionID} setQuestionID={setQuestionID}/>}
-        {showPopupFindPeer && <FindPeers togglePopupAsk={togglePopupAsk} togglePopupFindPeer={togglePopupFindPeer} togglePopupSolve={togglePopupSolve} questionID={questionID} userID={userID}/>}
+        {showPopupAsk && <Ask subjects={subjects} subject={subject} setSubject={setSubject} subjectIDs={subjectIDs}  subjectId={subjectId} setSubjectId={setSubjectId}  doubtId={doubtId} setDoubtId={setDoubtId} togglePopupAsk={togglePopupAsk} togglePopupFindPeer={togglePopupFindPeer} togglePopupSolve={togglePopupSolve} />}
+
+        {showPopupFindPeer && <FindPeers subjects={subjects} subject={subject} setSubject={setSubject} subjectIDs={subjectIDs}  subjectId={subjectId} setSubjectId={setSubjectId}  doubtId={doubtId} setDoubtId={setDoubtId} togglePopupAsk={togglePopupAsk} togglePopupFindPeer={togglePopupFindPeer} togglePopupSolve={togglePopupSolve} />}
+
         {showPopupSolve && <SolveRequests togglePopupAsk={togglePopupAsk} togglePopupFindPeer={togglePopupFindPeer} togglePopupSolve={togglePopupSolve}/>}
         
         <button className="button-divs-left" 
         onClick={togglePopupSolve}>
           <h3>Solve</h3>
           <p>Some Desc.</p>
-
         </button>
 
         <button className="button-divs-left">
           <h3>Dashboard</h3>
           <p>Some Desc.</p>
-
         </button>
-
-
-
-        <div className=''>
-          {/* <p>Welcome, {userID}!</p> */}
-          {/* <button onClick={onLogout}>Logout</button> */}
-
-        </div>
       </div>
-
-
-
-
     </div>
   );
 };

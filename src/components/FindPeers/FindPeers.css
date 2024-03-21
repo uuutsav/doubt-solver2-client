@@ -1,64 +1,65 @@
 .popup {
   position: relative;
-    width: 69vh;
-    height: auto;
-    max-height: 83vh;
-    overflow: auto;
-  }
-  
-  .popup-title {
-    margin: 8px auto 8px auto;
-    text-align: center;
-  }
-  
-  .popup-body {
-    margin-inline: 1.5;
-  }
-
-  .user-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 23px;
-  }
+  width: 69vh;
+  height: auto;
+  max-height: 83vh;
+  overflow: auto;
+}
 
 
-  
-  .user-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.popup-title {
+  margin: 8px auto 8px auto;
+  text-align: center;
+}
 
-    border-radius: 20px;
-    overflow: hidden;
-  }
+.popup-body {
+  margin-inline: 1.5;
+}
 
-  .dp-div {
-    flex: 2;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .user-dp {
-    height: 200px;
-    width: 100%;
-    object-fit: cover;
-  }
-  
-  .user-info {
-    flex: 1;
-    text-align: center;
-    
-  }
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 23px;
+  overflow: auto;
+}
 
-  .request-button {
-    margin: 5px;
-  }
 
-  .btn-div {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    left: 0px;
-  }
 
-  
+.user-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.dp-div {
+  flex: 2;
+  width: 100%;
+  height: 100%;
+}
+
+.user-dp {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.user-info {
+  flex: 1;
+  text-align: center;
+
+}
+
+.request-button {
+  margin: 5px;
+}
+
+.btn-div {
+  margin: 46px auto;
+  /* position: absolute; */
+  bottom: 0;
+  width: 23%;
+  left: 0px;
+}
