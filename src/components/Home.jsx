@@ -92,11 +92,11 @@ const Home = ({ }) => {
                 </p>
                 <div className="buttons my-5 flex gap-5 ">
                     <div
-                        className='px-8 py-5 text-2xl md:text-4xl bg-green-300 rounded-full cursor-pointer duration-150 hover:scale-110 '
+                        className='px-8 py-5 text-2xl md:text-3xl text-center bg-green-300 rounded-full cursor-pointer duration-150 hover:scale-110 '
                         onClick={togglePopupAsk}>
                         Ask a Doubt
                     </div>
-                    <div className='px-8 py-5 border-2 text-2xl md:text-4xl border-green-300 rounded-full cursor-pointer duration-150 hover:scale-110'
+                    <div className='px-8 py-5 border-2 text-2xl md:text-3xl text-cen border-green-300 rounded-full cursor-pointer duration-150 hover:scale-110'
                         onClick={togglePopupSolve}>
                         Solve Doubts
                     </div>
@@ -110,7 +110,7 @@ const Home = ({ }) => {
                         <FontAwesomeIcon icon={faLinkedin} />
                     </a>
                     <a
-                        href="http://www.linkedin.com/in/kumar-utsav-638914239/"
+                        href="https://github.com/uuutsav//"
                         target='_blank'
                         className='cursor-pointer duration-150 hover:scale-125'
                     >
