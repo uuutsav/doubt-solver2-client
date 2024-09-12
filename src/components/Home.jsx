@@ -77,9 +77,9 @@ const Home = ({ }) => {
 
 
     return (
-        <div className='hero md:px-[8vw] lg:px-[15vw] h-[93vh] bg-gray-200 flex '>
-            <div className='left-parent w-1/2 flex flex-col justify-center '>
-                <h1 className='text-9xl text-blue-900 font-bold z-50 '>
+        <div className='hero p-3 md:px-[8vw] lg:px-[15vw] min-h-[93vh] bg-gray-200 flex flex-col md:flex-row'>
+            <div className='left-parent lg:w-1/2 flex flex-col justify-center '>
+                <h1 className='text-6xl lg:text-9xl text-blue-900 font-bold z-50 '>
                     Doubt Comm<span className='text-green-300'>unity</span>
                 </h1>
                 <h2 className='text-4xl font-semibold my-3 text-blue-900'>
@@ -92,11 +92,11 @@ const Home = ({ }) => {
                 </p>
                 <div className="buttons my-5 flex gap-5 ">
                     <div
-                        className='px-8 py-5 text-4xl bg-green-300 rounded-full cursor-pointer duration-150 hover:scale-110 '
+                        className='px-8 py-5 text-2xl md:text-4xl bg-green-300 rounded-full cursor-pointer duration-150 hover:scale-110 '
                         onClick={togglePopupAsk}>
                         Ask a Doubt
                     </div>
-                    <div className='px-8 py-5 border-2 text-4xl border-green-300 rounded-full cursor-pointer duration-150 hover:scale-110'
+                    <div className='px-8 py-5 border-2 text-2xl md:text-4xl border-green-300 rounded-full cursor-pointer duration-150 hover:scale-110'
                         onClick={togglePopupSolve}>
                         Solve Doubts
                     </div>
@@ -119,7 +119,7 @@ const Home = ({ }) => {
 
                 </div>
             </div>
-            <div className='right-parent w-1/2 flex items-center'>
+            <div className='right-parent w-1/2 hidden md:flex items-center'>
                 <div className='p-5' >
                     <img src='./images/thinking_transparent.png' className='w-full' ></img>
                 </div>
