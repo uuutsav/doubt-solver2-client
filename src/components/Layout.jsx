@@ -2,6 +2,8 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from './Navbar'
 import { useNavigate } from 'react-router-dom'
+import HamburgerMenu from './Navbar/HamburgerMenu'
+import { RecoilRoot } from 'recoil'
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -18,10 +20,12 @@ const Layout = () => {
 
   return (
     <div>
-        <Navbar loggedIn={true} onLogout={handleLogout}/>
+      <RecoilRoot >
+        <Navbar loggedIn={true} onLogout={handleLogout} />
+        <HamburgerMenu />
         <Outlet />
-        
-      
+      </RecoilRoot>
+
     </div>
   )
 }
