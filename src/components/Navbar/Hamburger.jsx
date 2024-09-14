@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { isHamburgerActive } from '../../atoms/hamburgerAtom'
+import { isHamburgerActive } from '../../recoil/atoms/hamburgerAtom'
 
 const Hamburger = () => {
     const [active, setActive] = useRecoilState(isHamburgerActive);

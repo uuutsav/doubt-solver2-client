@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRecoilValue } from 'recoil'
-import { isHamburgerActive } from '../../atoms/hamburgerAtom';
+import { isHamburgerActive } from '../../recoil/atoms/hamburgerAtom';
 
 const HamburgerMenu = () => {
     const isActive = useRecoilValue(isHamburgerActive);  
