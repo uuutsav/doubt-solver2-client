@@ -1,107 +1,49 @@
 // Login.jsx
 import React, { useState } from 'react';
-import axios from 'axios';
-import './Login.css'
 import Navbar from './Navbar';
-import { createBrowserRouter, RouterProvider, useNavigate } from 'react-router-dom'
-import Home from './Home';
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../hooks/useAuth'
+import FormInput from './Form/FormInput';
 
-const Login = ({ onLogin }) => {
+const Login = ({ }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const [myToken, setToken] = useState(localStorage.getItem('token'))
-
+  const { loginUser } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    try {
-      const data = {
-        email,
-        password,
-      }
-      console.log(data)
-      const response = await axios.post('http://localhost:5000/api/auth/login', data);
-      const { token, userID } = response.data;
-      setToken(token)
-      localStorage.setItem('token', token)
-      console.log(userID)
-      // onLogin(token);
-      setTimeout(() => {
-        navigate('/')
-      }, 1000)
-      // navigate('/')
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
+    loginUser({ email: email, password: password })
+    setTimeout(() => {
+      navigate('/home')
+    }, 500)
   };
 
-  const goToSignUp = async (e) => {
-    navigate('/signup')
-  }
-
   return (
-    <>
-      <Navbar loggedIn={false} />
-
-      <div className="container">
-
-        <div className="login__content">
-          <img src="/images/bg-login.png" className="login__img"></img>
-
-          <form onSubmit={handleLogin} className="login__form">
-            <div>
-              <h1 className="login__title">
-                <span>Welcome</span> Back
-              </h1>
-              <p className="login__description">
-                {/* <!-- Login desc. --> */}
-
-              </p>
-            </div>
-
-            <div>
-              <div className="login__inputs">
-                <div>
-                  <label htmlFor="input-email" className="login__label">Email</label>
-                  <input required
-                    type="email"
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="login__input" id="input-email"></input>
-                </div>
-
-                <div>
-                  <label htmlFor="input-pass" className="login__label">Password</label>
-
-                  <div className="login__box">
-                    <input required
-                      type="password"
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="login__input" id="input-pass"></input>
-                    <i className="ri-eye-off-line login__eye" id="input-icon"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <div className="login__buttons">
-                <button className="login__button" type='submit'>Log In</button>
-                <button className="login__button login__button-ghost" onClick={goToSignUp}>Sign Up</button>
-              </div>
-
-              <a href="#" className="login__forgot">Forgot Password?</a>
-            </div>
+    <div>
+      <Navbar />
+      <div className="container bg-gray-200 h-[100vh] min-w-[100vw] flex flex-col gap-[10vw] lg:flex-row items-center">
+        <div className='flex flex-col flex-1 justify-center items-center lg:items-end p-3'>
+          <form onSubmit={handleLogin} className='flex flex-col items-center'>
+            <h2 className='text-3xl font-semibold'>Log In</h2>
+            <FormInput type={'email'} placeholder={'Email'} onChange={(e) => {
+              setEmail(e);
+            }} />
+            <FormInput type={'password'} placeholder={'Password'} onChange={(e) => {
+              setPassword(e);
+            }} />
+            <button type='submit' className='bg-green-300 px-5 py-3 my-3 rounded-full hover:scale-110 duration-150' >
+              Signup
+            </button>
+            <div className='my-3 cursor-pointer hover:underline' onClick={() => { navigate('/signup') }} >Don't have an account?</div>
           </form>
         </div>
+        <div className='flex-1  px-3 overflow-hidden object-fill '>
+          <img src="/images/thinking.png" alt="" className='h-full lg:max-h-[50vh] ' />
+        </div>
       </div>
-    </>
-
+    </div>
   );
 };
 
