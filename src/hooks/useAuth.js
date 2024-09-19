@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil"
 import { authAtom } from "../recoil/atoms/authAtom"
-import { login } from "../services/authService";
+import { login, register } from "../services/authService";
 
 export const useAuth = () => {
     const [authState, setAuthState] = useRecoilState(authAtom);
@@ -21,6 +21,16 @@ export const useAuth = () => {
         setAuthState({isAuthenticated, user: null, token: null});
     };
 
-    return { authState, loginUser, logoutUser};
+    const registerUser = async (credentials) => {
+        try {
+            const {token, user} = await register(credentials);
+            localStorage.setItem('token', token);
+            setAuthState({isAuthenticated: true, user, token});
+        } catch (error){
+            console.log("Signup Failed: ", error);
+        }
+    }
+
+    return { authState, loginUser, logoutUser, registerUser};
 };
 

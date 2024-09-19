@@ -7,5 +7,5 @@ export const login = async (credentials) => {
 
 export const register = async (data) => {
     const response = await axios.post('http://localhost:5000/api/auth/register', data);
-    return response.data;
+    return response.data; // {token, user}
 };

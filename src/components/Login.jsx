@@ -34,7 +34,7 @@ const Login = ({ }) => {
               setPassword(e);
             }} />
             <button type='submit' className='bg-green-300 px-5 py-3 my-3 rounded-full hover:scale-110 duration-150' >
-              Signup
+              LogIn
             </button>
             <div className='my-3 cursor-pointer hover:underline' onClick={() => { navigate('/signup') }} >Don't have an account?</div>
           </form>
